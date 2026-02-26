@@ -1,3 +1,3 @@
 # Email Carbon Footprint
 
-WIP chrome extension.
+Helps cut email carbon usage.

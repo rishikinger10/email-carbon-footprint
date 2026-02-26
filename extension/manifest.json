@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Gmail Carbon Footprint Reducer",
+  "version": "0.1.0",
+  "description": "Reduce your email carbon footprint",
+  "permissions": ["storage"],
+  "host_permissions": ["https://mail.google.com/*"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Gmail Carbon Reducer"
+  }
+}
