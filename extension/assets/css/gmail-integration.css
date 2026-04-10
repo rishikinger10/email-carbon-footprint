@@ -1,2 +1,182 @@
-.ecf-badge { padding: 1px 6px; border-radius: 3px; background: #fff3cd; }
-.ecf-banner { background: #e8f5e9; padding: 8px 12px; }
+.carbon-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.carbon-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+.carbon-modal-content h3 {
+    color: #1a73e8;
+    margin-top: 0;
+}
+
+.carbon-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.carbon-btn-primary,
+.carbon-btn-secondary {
+    flex: 1;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #1a73e8;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.carbon-btn-primary {
+    background: #1a73e8;
+    color: white;
+}
+
+.carbon-btn-primary:hover {
+    background: #1557b0;
+}
+
+.carbon-btn-secondary {
+    background: white;
+    color: #1a73e8;
+}
+
+.carbon-btn-secondary:hover {
+    background: #e8f0fe;
+}
+
+.carbon-tip {
+    background: #e6f4ea;
+    border-left: 3px solid #34a853;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.carbon-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: 360px;
+    background: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    animation: carbonSlideIn 0.3s ease-out;
+    z-index: 9999;
+}
+
+@keyframes carbonSlideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.carbon-compose-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+.carbon-word-count {
+    color: #666;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.carbon-word-count-low {
+    color: #ea4335;
+    font-weight: bold;
+}
+
+.carbon-compress-btn {
+    border: 1px solid #34a853;
+    border-radius: 4px;
+    background: white;
+    color: #34a853;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.carbon-compress-btn:hover {
+    background: #e6f4ea;
+}
+
+.carbon-unsub-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+    padding: 10px 14px;
+    border: 1px solid #34a853;
+    border-radius: 8px;
+    background: #e6f4ea;
+    color: #1e3a26;
+    font-size: 13px;
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+.carbon-unsub-banner span {
+    flex: 1;
+    min-width: 200px;
+}
+
+.carbon-unsub-banner .carbon-btn-primary,
+.carbon-unsub-banner .carbon-btn-secondary {
+    flex: 0 0 auto;
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+.carbon-unsub-banner .carbon-btn-primary {
+    background: #34a853;
+    border-color: #34a853;
+}
+
+.carbon-unsub-banner .carbon-btn-primary:hover {
+    background: #1e7e34;
+}
+
+.carbon-unsub-banner .carbon-btn-secondary {
+    color: #34a853;
+    border-color: #34a853;
+}
+
+.carbon-row-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    background: #fef7e0;
+    color: #b06000;
+    font-size: 11px;
+    font-weight: normal;
+    vertical-align: middle;
+}
