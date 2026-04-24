@@ -1,1 +1,224 @@
-<!DOCTYPE html><html><body><h1>Carbon Reducer</h1><script src="popup.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gmail Carbon Reducer</title>
+    <style>
+        body {
+            width: 350px;
+            padding: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 18px;
+            color: #1a73e8;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 14px;
+            margin: 0 0 12px;
+        }
+
+        .stats {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .deep-clean {
+            margin-bottom: 20px;
+        }
+
+        .deep-clean p {
+            font-size: 12px;
+            color: #666;
+            margin: 0 0 10px;
+        }
+
+        .deep-clean button {
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #34a853;
+            border-radius: 6px;
+            background: white;
+            color: #1e7e34;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .deep-clean button:hover {
+            background: #e6f4ea;
+        }
+
+        .settings {
+            margin-top: 20px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .setting-item input[type="number"] {
+            width: 55px;
+            margin-right: 10px;
+            padding: 3px 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #1a73e8;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../assets/icons/icon48.png" alt="Logo">
+        <h1>Gmail Carbon Reducer</h1>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <span>Carbon Saved</span>
+            <span id="carbonSaved">0g CO₂</span>
+        </div>
+        <div class="stat-item">
+            <span>Storage Saved</span>
+            <span id="storageSaved">0 MB</span>
+        </div>
+        <div class="stat-item">
+            <span>Emails Optimized</span>
+            <span id="emailsOptimized">0</span>
+        </div>
+    </div>
+
+    <div class="deep-clean">
+        <h2>🧹 Deep Clean</h2>
+        <p>One-click Gmail searches that find the highest-carbon mail. Review the results, then select all &amp; delete.</p>
+        <button id="cleanOldUnstarred">Old unstarred mail (past retention period)</button>
+        <button id="cleanPromotions">Old promotions &amp; newsletters</button>
+        <button id="cleanLargeAttachments">Large attachments over 1 year old</button>
+    </div>
+
+    <div class="settings">
+        <h2>Settings</h2>
+        <div class="setting-item">
+            <label class="switch">
+                <input type="checkbox" id="deleteSuggestions" checked>
+                <span class="slider"></span>
+            </label>
+            <span>Suggest deleting spam &amp; old emails</span>
+        </div>
+        <div class="setting-item">
+            <input type="number" id="retentionDays" min="1" max="3650" value="30">
+            <span>Retention policy: flag unimportant emails older than this many days</span>
+        </div>
+        <div class="setting-item">
+            <label class="switch">
+                <input type="checkbox" id="unsubscribeAssistant" checked>
+                <span class="slider"></span>
+            </label>
+            <span>Suggest unsubscribing from newsletters</span>
+        </div>
+        <div class="setting-item">
+            <label class="switch">
+                <input type="checkbox" id="imageCompression" checked>
+                <span class="slider"></span>
+            </label>
+            <span>Image compression &amp; large-attachment warnings</span>
+        </div>
+        <div class="setting-item">
+            <label class="switch">
+                <input type="checkbox" id="shortEmailPrompt" checked>
+                <span class="slider"></span>
+            </label>
+            <span>Warn before sending very short emails</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Making email environmentally friendly, one message at a time.</p>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
