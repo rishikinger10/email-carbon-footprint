@@ -1,16 +1,24 @@
 {
   "manifest_version": 3,
   "name": "Gmail Carbon Footprint Reducer",
-  "version": "0.1.0",
-  "description": "Reduce your email carbon footprint",
-  "permissions": ["storage"],
-  "host_permissions": ["https://mail.google.com/*"],
+  "version": "2.0.0",
+  "description": "Reduce your email carbon footprint: compress attachments, unsubscribe from newsletters, and clean up old mail",
+
+  "permissions": [
+    "storage"
+  ],
+
+  "host_permissions": [
+    "https://mail.google.com/*"
+  ],
+
   "content_scripts": [{
     "matches": ["https://mail.google.com/*"],
     "js": ["content/content.js"],
     "css": ["assets/css/gmail-integration.css"],
     "run_at": "document_idle"
   }],
+
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Gmail Carbon Reducer",
@@ -21,6 +29,7 @@
       "128": "assets/icons/icon128.png"
     }
   },
+
   "icons": {
     "16": "assets/icons/icon16.png",
     "32": "assets/icons/icon32.png",
