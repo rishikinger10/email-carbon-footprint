@@ -42,7 +42,7 @@ This extension is built around those two levers.
    ```bash
    git clone https://github.com/rishikinger10/email-carbon-footprint.git
    ```
-2. Open `chrome://extensons/` in Chrome or any Chromium browser.
+2. Open `chrome://extensions/` in Chrome or any Chromium browser.
 3. Enable Developer mode (top right toggle).
 4. Click "Load unpacked" and select the `extension/` folder.
 5. Open Gmail. There is nothing else to install or run.
