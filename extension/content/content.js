@@ -38,6 +38,7 @@ class CarbonReducer {
     };
     this.sendApproved = false;
     this.scanTimer = null;
+    this.toolbars = new Map(); // composeBody -> floating toolbar element
   }
 
   async init() {
@@ -55,11 +56,14 @@ class CarbonReducer {
     // The scan itself is debounced — mutations arrive in bursts.
     new MutationObserver(() => this.onGmailUpdate())
       .observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('scroll', () => this.repositionToolbars(), true);
+    window.addEventListener('resize', () => this.repositionToolbars());
     this.onGmailUpdate();
   }
 
   onGmailUpdate() {
     document.querySelectorAll(COMPOSE_BODY_SELECTOR).forEach((el) => this.enhanceCompose(el));
+    this.repositionToolbars();
     clearTimeout(this.scanTimer);
     this.scanTimer = setTimeout(() => {
       this.scanInbox();
@@ -194,13 +198,36 @@ class CarbonReducer {
       toolbar.appendChild(btn);
     }
 
-    composeBody.parentElement.appendChild(toolbar);
+    // Appended to document.body and positioned with `fixed` coordinates,
+    // not into Gmail's own compose DOM: that container has a Gmail-computed
+    // fixed height with clipped overflow, so an extra in-flow node there
+    // pushes Gmail's own Send button row past the visible edge.
+    document.body.appendChild(toolbar);
+    this.toolbars.set(composeBody, toolbar);
+    this.positionToolbar(composeBody, toolbar);
 
     composeBody.addEventListener('input', () => {
       const words = this.countWords(composeBody.innerText);
       wordCount.textContent = `Words: ${words}`;
       wordCount.classList.toggle('carbon-word-count-low', words > 0 && words < SHORT_EMAIL_WORDS);
     });
+  }
+
+  positionToolbar(composeBody, toolbar) {
+    const rect = composeBody.getBoundingClientRect();
+    toolbar.style.top = `${Math.max(0, rect.top - toolbar.offsetHeight - 4)}px`;
+    toolbar.style.left = `${rect.left}px`;
+  }
+
+  repositionToolbars() {
+    for (const [composeBody, toolbar] of this.toolbars) {
+      if (!composeBody.isConnected) {
+        toolbar.remove();
+        this.toolbars.delete(composeBody);
+        continue;
+      }
+      this.positionToolbar(composeBody, toolbar);
+    }
   }
 
   countWords(text) {
